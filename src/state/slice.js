@@ -1,42 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 export const initialState = {
-   users: [
-      {
-         user: "randytandy",
-         points: 500,
-         updated: 1659835964821,
-      },
-      {
-         user: "nycpig",
-         points: 327,
-         updated: 1659835964821,
-      },
-      {
-         user: "thunderbong",
-         points: 100,
-         updated: 1659835964821,
-      },
-   ],
+   users: ["norvig", "tptacek", "nycpig"],
 }
 
 export const userSlice = createSlice({
    name: "users",
    initialState,
    reducers: {
-      ADD(state, action) {
-         this.state.push(action.data)
+      addUser(state, action) {
+         state.users.push(action.payload)
       },
 
-      REMOVE(state, action) {
-         return this.state.users.filter(user => user !== action.data)
-      },
-
-      UPDATE(state, action) {
-         // update points + date
+      removeUser(state, action) {
+         return {
+            users: state.users.filter(user => user !== action.payload)
+         }
       },
    }
 })
 
-export const { ADD, REMOVE, UPDATE } = userSlice.actions;
+export const { addUser, removeUser } = userSlice.actions;
 export default userSlice.reducer;
